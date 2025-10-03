@@ -2,6 +2,7 @@ import 'package:ecommerce/Screens/cart_screen.dart';
 import 'package:ecommerce/Screens/catalog_screen.dart';
 import 'package:ecommerce/Screens/favourite_screen.dart';
 import 'package:ecommerce/Screens/orders_screen.dart';
+import 'package:ecommerce/Screens/profile_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 
@@ -26,6 +27,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
     FavouriteScreen(),
     CartScreen(),
     OrdersScreen(),
+    ProfileScreen(),
   ];
 
   @override
@@ -35,7 +37,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
       bottomNavigationBar: Container(
         height: MediaQuery.of(context).size.height * 0.11,
         decoration: BoxDecoration(
-          color: const Color(0xFFFFFFFF),
+          color: Colors.white, // White background
           boxShadow: [
             BoxShadow(blurRadius: 20, color: Colors.black.withOpacity(0.1)),
           ],
@@ -45,67 +47,83 @@ class _BottomNavBarState extends State<BottomNavBar> {
           child: GNav(
             onTabChange: _navigateBottomBar,
             selectedIndex: _selectedIndex,
-            tabBackgroundColor: const Color(0xFFF9F9F9),
+            tabBackgroundColor: Colors.grey.shade200,
             gap: 8,
             padding: const EdgeInsets.all(12),
             duration: const Duration(milliseconds: 300),
+            color: Colors.grey.shade600,
+            activeColor: Colors.black,
+
             tabs: [
               GButton(
-                icon: Icons.home,
+                icon: Icons.circle,
+                iconColor: Colors.transparent,
                 text: "Home",
-                iconColor: Color(0xFF939393),
-                textColor: Color(0xFF939393), // visible even if not selected
-                // leading: Image.asset(
-                //   "assets/images/home2.png",
-                //   height: 24,
-                //   width: 24,
-                //   color: _selectedIndex == 0
-                //       ? Color(0xFF4C4DDC)
-                //       : Color(0xFF939393),
-                // ),
+                textColor: Colors.black,
+                leading: Image.asset(
+                  "assets/images/home.png",
+                  height: 24,
+                  width: 24,
+                  color: _selectedIndex == 0
+                      ? Colors.black
+                      : Colors.grey.shade600,
+                ),
               ),
               GButton(
-                icon: Icons.calendar_today,
                 text: "Favourites",
-                iconColor: Color(0xFF939393),
-                textColor: Color(0xFF939393),
-                // leading: Image.asset(
-                //   "assets/images/calendar.png",
-                //   height: 24,
-                //   width: 24,
-                //   color: _selectedIndex == 1
-                //       ? Color(0xFF4C4DDC)
-                //       : Color(0xFF939393),
-                // ),
+                icon: Icons.circle,
+                iconColor: Colors.transparent,
+                textColor: Colors.black,
+                leading: Image.asset(
+                  "assets/images/heart1.png",
+                  height: 24,
+                  width: 24,
+                  color: _selectedIndex == 1
+                      ? Colors.black
+                      : Colors.grey.shade600,
+                ),
               ),
               GButton(
-                //icon: Icons.circle, // placeholder iconColor: Colors.transparent,
-                icon: Icons.bookmark,
+                icon: Icons.circle,
+                iconColor: Colors.transparent,
                 text: "Cart",
-                iconColor: Color(0xFF939393),
-                textColor: Color(0xFF939393),
-                // leading: Image.asset(
-                //   "assets/images/bookmark.png",
-                //   height: 24,
-                //   width: 24,
-                //   color: _selectedIndex == 2
-                //       ? Color(0xFF4C4DDC)
-                //       : Color(0xFF939393),
-                // ),
+                textColor: Colors.black,
+                leading: Image.asset(
+                  "assets/images/cart.png",
+                  height: 24,
+                  width: 24,
+                  color: _selectedIndex == 2
+                      ? Colors.black
+                      : Colors.grey.shade600,
+                ),
               ),
               GButton(
-                icon: Icons.person,
+                icon: Icons.circle,
+                iconColor: Colors.transparent,
                 text: "Orders",
-                iconColor: Color(0xFF939393),
-                textColor: Color(0xFF939393),
-                // leading: Image.asset(
-                //   "assets/images/profile.png",
-                //   height: 24,
-                //   width: 24,
-                //   color: _selectedIndex == 3
-                //       ? Color(0xFF4C4DDC)
-                //       : Color(0xFF939393),
-                // ),
+                textColor: Colors.black,
+                leading: Image.asset(
+                  "assets/images/history.png",
+                  height: 24,
+                  width: 24,
+                  color: _selectedIndex == 3
+                      ? Colors.black
+                      : Colors.grey.shade600,
+                ),
+              ),
+              GButton(
+                icon: Icons.circle,
+                iconColor: Colors.transparent,
+                text: "Account",
+                textColor: Colors.black,
+                leading: Image.asset(
+                  "assets/images/user.png",
+                  height: 24,
+                  width: 24,
+                  color: _selectedIndex == 4
+                      ? Colors.black
+                      : Colors.grey.shade600,
+                ),
               ),
             ],
           ),

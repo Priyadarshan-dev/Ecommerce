@@ -1,30 +1,30 @@
 import 'package:ecommerce/Screens/product_detail.dart';
-import 'package:ecommerce/services/api_services.dart';
-import 'package:flutter/material.dart';
 import 'package:ecommerce/models/product_model.dart';
+import 'package:ecommerce/Services/api_services.dart';
+import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class TshirtsProducts extends StatefulWidget {
-  const TshirtsProducts({super.key});
+class HoodiesPoducts extends StatefulWidget {
+  const HoodiesPoducts({super.key});
 
   @override
-  State<TshirtsProducts> createState() => _TshirtsProductsState();
+  State<HoodiesPoducts> createState() => _HoodiesPoductsState();
 }
 
-class _TshirtsProductsState extends State<TshirtsProducts> {
-  late Future<List<Product>> futureTshirts;
+class _HoodiesPoductsState extends State<HoodiesPoducts> {
+  late Future<List<Product>> futureHoodies;
   final ApiServices _apiService = ApiServices();
 
   @override
   void initState() {
     super.initState();
-    futureTshirts = _apiService.getProductsByCategory('Mens T-Shirts');
+    futureHoodies = _apiService.getProductsByCategory("UniSex Hoodies");
   }
 
   @override
   Widget build(BuildContext context) {
     return FutureBuilder<List<Product>>(
-      future: futureTshirts,
+      future: futureHoodies,
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return Center(child: CircularProgressIndicator());
@@ -38,10 +38,11 @@ class _TshirtsProductsState extends State<TshirtsProducts> {
           return Center(child: Text('No t-shirts found'));
         }
 
-        final tshirts = snapshot.data!;
+        final hoodies = snapshot.data!;
 
         return GridView.builder(
-          itemCount: tshirts.length,
+          padding: EdgeInsets.all(10),
+          itemCount: hoodies.length,
           gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: 2,
             mainAxisSpacing: 10,
@@ -49,7 +50,7 @@ class _TshirtsProductsState extends State<TshirtsProducts> {
             childAspectRatio: 0.7,
           ),
           itemBuilder: (context, index) {
-            final product = tshirts[index];
+            final product = hoodies[index];
             return GestureDetector(
               onTap: () {
                 Navigator.push(
@@ -67,7 +68,7 @@ class _TshirtsProductsState extends State<TshirtsProducts> {
                   children: [
                     // HERO ANIMATION ADDED HERE
                     Hero(
-                      tag: 'product_image_${product.id}', // Same tag as others
+                      tag: 'product_image_${product.id}', // Same tag as AllProducts
                       child: ClipRRect(
                         borderRadius: BorderRadius.vertical(
                           top: Radius.circular(12),
@@ -76,13 +77,11 @@ class _TshirtsProductsState extends State<TshirtsProducts> {
                         child: Image.asset(
                           product.image,
                           height: 174,
-                          width: 174,
+                          width: 164,
                           fit: BoxFit.cover,
                         ),
                       ),
                     ),
-
-                    // Product Details
                     Column(
                       children: [
                         Padding(

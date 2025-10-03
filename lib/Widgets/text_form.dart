@@ -5,9 +5,10 @@ class TextForm extends StatelessWidget {
   final TextEditingController controller;
   final String hintText;
   final bool obscureText;
-  final String? suffixImage; // changed from IconData
-  final String? prefixImage; // changed from IconData
+  final String? suffixImage;
+  final String? prefixImage;
   final String? labelText;
+  final ValueChanged<String>? onChanged;
 
   const TextForm({
     super.key,
@@ -17,6 +18,7 @@ class TextForm extends StatelessWidget {
     this.suffixImage,
     this.prefixImage,
     this.labelText,
+    this.onChanged,
   });
 
   @override
@@ -45,6 +47,7 @@ class TextForm extends StatelessWidget {
           child: TextField(
             obscureText: obscureText,
             controller: controller,
+            onChanged: onChanged,
             decoration: InputDecoration(
               border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(10),
@@ -64,10 +67,9 @@ class TextForm extends StatelessWidget {
                 color: Colors.grey.shade600,
               ),
 
-              // ✅ Use asset images here
               prefixIcon: prefixImage != null
                   ? Padding(
-                      padding: const EdgeInsets.only(left: 0), // adjust size
+                      padding: const EdgeInsets.only(left: 0),
                       child: Image.asset(
                         prefixImage!,
                         color: Colors.grey.shade600,
